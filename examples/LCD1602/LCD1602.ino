@@ -1,4 +1,4 @@
-﻿#include <Wire.h>
+#include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <OCROBOT_I2C_GPS.h>                                                                                                                                                                                    
 GPS GPS(4);

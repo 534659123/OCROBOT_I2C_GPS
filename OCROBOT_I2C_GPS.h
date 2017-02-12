@@ -7,30 +7,35 @@
  #include "WProgram.h"
 #endif
 
-/*ÇëÇóÖ¸ÁîÂëÁĞ±í*/
-
+#define hz1  101   //1Hz
+#define hz5  102   //5hz
+#define hz10 103   //10Hz
+#define hz0_33 104  // 0.33Hz
+#define hz0_2 105  // 0.2Hz
+#define hz0_1 106  //0.1Hz
+#define hz0_05 107 //0.05Hz
 
 /***************/
 
 class GPS{
 	public:
 		GPS(byte Addr);
-		void UtcTime(byte &UTC_HH, byte &UTC_MM, byte &UTC_SS, byte &UTC_MS);   //»ñÈ¡UTCÊ±¼ä
-		float Latitude(void);  //·µ»ØÎ³¶È
-		char LatitudeDirection(void); //·µ»ØÎ³¶È·½Ïò×ÖÄ¸£¬  ±±Î³N,ÄÏÎ³S
-		float Longitude(void); // ¾­¶È
-		char LongitudeDirection(void); // ¾­¶È·½Ïò   E ¶«¾­ WÎ÷¾­
-		byte Positioning(void);  //¶¨Î»×´Ì¬ 0-3  ¶¨Î»¿É¿¿ĞÔÖ¸Ê¾  0:ÎŞ¶¨Î»  1:SPS Ä£Ê½¶¨Î»  2:²î·Ö¡¢SPSÄ£Ê½¶¨Î» 3 :PPS Ä£Ê½¶¨Î»
-		byte Satellite(void);   //ÓĞĞ§ÎÀĞÇÊıÁ¿
-		float HDOP(void);  //Ë®Æ½¶¨Î»¾«¶ÈµÄ(µ¥Î» Ã×)
-		float MSL(void);  //ÍÖÇò¸ß£¬µ¥Î»Ã×
-		float SeaLevel(void); //º£Æ½Ãæ¸ß£¬ µ¥Î»Ã× -9999 ~ 9999
-		void UtcDate(byte &UTC_YY, byte &UTC_mm, byte &UTC_DD);  //»ñÈ¡UTCÈÕÆÚ
-		float Course(void); //º½Ïò  Õæ±±Æ« ¶ÈÊı 0-359
-		float Speed(void); //ËÙ¶È Ç§Ã×Ã¿Ğ¡Ê±
+		void UtcTime(byte &UTC_HH, byte &UTC_MM, byte &UTC_SS, byte &UTC_MS);   //è·å–UTCæ—¶é—´
+		float Latitude(void);  //è¿”å›çº¬åº¦
+		char LatitudeDirection(void); //è¿”å›çº¬åº¦æ–¹å‘å­—æ¯ï¼Œ  åŒ—çº¬N,å—çº¬S
+		float Longitude(void); // ç»åº¦
+		char LongitudeDirection(void); // ç»åº¦æ–¹å‘   E ä¸œç» Wè¥¿ç»
+		byte Positioning(void);  //å®šä½çŠ¶æ€ 0-3  å®šä½å¯é æ€§æŒ‡ç¤º  0:æ— å®šä½  1:SPS æ¨¡å¼å®šä½  2:å·®åˆ†ã€SPSæ¨¡å¼å®šä½ 3 :PPS æ¨¡å¼å®šä½
+		byte Satellite(void);   //æœ‰æ•ˆå«æ˜Ÿæ•°é‡
+		float HDOP(void);  //æ°´å¹³å®šä½ç²¾åº¦çš„(å•ä½ ç±³)
+		float MSL(void);  //æ¤­çƒé«˜ï¼Œå•ä½ç±³
+		float SeaLevel(void); //æµ·å¹³é¢é«˜ï¼Œ å•ä½ç±³ -9999 ~ 9999
+		void UtcDate(byte &UTC_YY, byte &UTC_mm, byte &UTC_DD);  //è·å–UTCæ—¥æœŸ
+		float Course(void); //èˆªå‘  çœŸåŒ—å åº¦æ•° 0-359
+		float Speed(void); //é€Ÿåº¦ åƒç±³æ¯å°æ—¶
+		void SetReplace(byte Replace); //ç¨‹åºåˆ·æ–°ç‡ æ•°å€¼èŒƒå›´101-107  101:1hz   102:5hz
 	private:
 		byte _addr;
-	
 };
 
-#endif
+#endif  

@@ -9,17 +9,17 @@ GPS::GPS(byte Addr)
 
 void GPS::UtcTime(byte &UTC_HH, byte &UTC_MM, byte &UTC_SS, byte &UTC_MS)
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(1);              // ÇëÇóÖ¸ÁîÂë
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(1);              // è¯·æ±‚æŒ‡ä»¤ç 
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)4);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)4);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
 	byte UTCdata[4];
 	byte s=0;
-	while(Wire.available())    // ÅĞ¶ÏÊÇ·ñÓĞÊı¾İ
+	while(Wire.available())    // åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®
 	{ 
-		UTCdata[s]= Wire.read(); // ¶ÁÈ¡Êı¾İ
+		UTCdata[s]= Wire.read(); // è¯»å–æ•°æ®
 		s++;
 	}
 	UTC_HH = UTCdata[0];
@@ -28,19 +28,19 @@ void GPS::UtcTime(byte &UTC_HH, byte &UTC_MM, byte &UTC_SS, byte &UTC_MS)
 	UTC_MS = UTCdata[3];
 }
 
-float GPS::Latitude(void)  //·µ»ØÎ³¶È
+float GPS::Latitude(void)  //è¿”å›çº¬åº¦
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(2);              // ÇëÇóÖ¸ÁîÂë(Î³¶ÈÊı¾İ)
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(2);              // è¯·æ±‚æŒ‡ä»¤ç (çº¬åº¦æ•°æ®)
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)4);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)4);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
 	byte LatitudeData[4];
 	byte s=0;
-	while(Wire.available())    // ÅĞ¶ÏÊÇ·ñÓĞÊı¾İ
+	while(Wire.available())    // åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®
 	{ 
-		LatitudeData[s]= Wire.read(); // ¶ÁÈ¡Êı¾İ
+		LatitudeData[s]= Wire.read(); // è¯»å–æ•°æ®
 		s++;
 	}
 	float latitude;
@@ -49,33 +49,33 @@ float GPS::Latitude(void)  //·µ»ØÎ³¶È
 	
 }
 
-char GPS::LatitudeDirection(void) //Î³¶È·½Ïò
+char GPS::LatitudeDirection(void) //çº¬åº¦æ–¹å‘
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(3);              // ÇëÇóÖ¸ÁîÂë(Î³¶È·½Ïò)
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(3);              // è¯·æ±‚æŒ‡ä»¤ç (çº¬åº¦æ–¹å‘)
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)1);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
-	char direction = Wire.read(); // ¶ÁÈ¡Êı¾İ
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)1);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
+	char direction = Wire.read(); // è¯»å–æ•°æ®
 	return direction;
 }
 
 /*----------------*/
 
-float GPS::Longitude(void)  //·µ»Ø¾­¶È
+float GPS::Longitude(void)  //è¿”å›ç»åº¦
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(4);              // ÇëÇóÖ¸ÁîÂë(¾­¶ÈÊı¾İ)
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(4);              // è¯·æ±‚æŒ‡ä»¤ç (ç»åº¦æ•°æ®)
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)4);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)4);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
 	byte longitudeData[4];
 	byte s=0;
-	while(Wire.available())    // ÅĞ¶ÏÊÇ·ñÓĞÊı¾İ
+	while(Wire.available())    // åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®
 	{ 
-		longitudeData[s]= Wire.read(); // ¶ÁÈ¡Êı¾İ
+		longitudeData[s]= Wire.read(); // è¯»å–æ•°æ®
 		s++;
 	}
 	float longitude;
@@ -84,56 +84,56 @@ float GPS::Longitude(void)  //·µ»Ø¾­¶È
 	
 }
 
-char GPS::LongitudeDirection(void) //Î³¶È·½Ïò
+char GPS::LongitudeDirection(void) //çº¬åº¦æ–¹å‘
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(5);              // ÇëÇóÖ¸ÁîÂë(Î³¶È·½Ïò)
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(5);              // è¯·æ±‚æŒ‡ä»¤ç (çº¬åº¦æ–¹å‘)
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)1);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
-	char direction = Wire.read(); // ¶ÁÈ¡Êı¾İ
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)1);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
+	char direction = Wire.read(); // è¯»å–æ•°æ®
 	return direction;
 }
 
 
-byte GPS::Positioning(void)   // ¶¨Î»Çé¿ö
+byte GPS::Positioning(void)   // å®šä½æƒ…å†µ
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(6);              // ÇëÇóÖ¸ÁîÂë(¶¨Î»×´Ì¬)
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(6);              // è¯·æ±‚æŒ‡ä»¤ç (å®šä½çŠ¶æ€)
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-		/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)1);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
-	byte positioning = Wire.read(); // ¶ÁÈ¡Êı¾İ
+		/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)1);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
+	byte positioning = Wire.read(); // è¯»å–æ•°æ®
 	return positioning;
 }
 
-byte GPS::Satellite()  //ÓĞĞ§ÎÀĞÇÊıÁ¿
+byte GPS::Satellite()  //æœ‰æ•ˆå«æ˜Ÿæ•°é‡
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(7);              // ÇëÇóÖ¸ÁîÂë(ÓĞĞ§ÎÀĞÇÊıÁ¿)
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(7);              // è¯·æ±‚æŒ‡ä»¤ç (æœ‰æ•ˆå«æ˜Ÿæ•°é‡)
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-			/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)1);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
-	byte satellite = Wire.read(); // ¶ÁÈ¡Êı¾İ
+			/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)1);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
+	byte satellite = Wire.read(); // è¯»å–æ•°æ®
 	return satellite;
 }
 
 float GPS::HDOP(void)
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(8);              // ÇëÇóÖ¸ÁîÂë(Ë®Æ½¶¨Î»¾«¶È) µ¥Î»Ã×
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(8);              // è¯·æ±‚æŒ‡ä»¤ç (æ°´å¹³å®šä½ç²¾åº¦) å•ä½ç±³
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-		/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)4);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
+		/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)4);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
 	byte HDOPData[4];
 	byte s=0;
-	while(Wire.available())    // ÅĞ¶ÏÊÇ·ñÓĞÊı¾İ
+	while(Wire.available())    // åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®
 	{ 
-		HDOPData[s]= Wire.read(); // ¶ÁÈ¡Êı¾İ
+		HDOPData[s]= Wire.read(); // è¯»å–æ•°æ®
 		s++;
 	}
 	float Hdop;
@@ -143,17 +143,17 @@ float GPS::HDOP(void)
 
 float GPS::MSL(void)
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(9);              // ÇëÇóÖ¸ÁîÂë(ÍÖÇò¸ß) µ¥Î»Ã×
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(9);              // è¯·æ±‚æŒ‡ä»¤ç (æ¤­çƒé«˜) å•ä½ç±³
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)4);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)4);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
 	byte MSLData[4];
 	byte s=0;
-	while(Wire.available())    // ÅĞ¶ÏÊÇ·ñÓĞÊı¾İ
+	while(Wire.available())    // åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®
 	{ 
-		MSLData[s]= Wire.read(); // ¶ÁÈ¡Êı¾İ
+		MSLData[s]= Wire.read(); // è¯»å–æ•°æ®
 		s++;
 	}
 	float Msl;
@@ -164,17 +164,17 @@ float GPS::MSL(void)
 
 float GPS::SeaLevel(void)
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(10);              // ÇëÇóÖ¸ÁîÂë(º£Æ½¸ß) µ¥Î»Ã×
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(10);              // è¯·æ±‚æŒ‡ä»¤ç (æµ·å¹³é«˜) å•ä½ç±³
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)4);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)4);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
 	byte SeaLevelData[4];
 	byte s=0;
-	while(Wire.available())    // ÅĞ¶ÏÊÇ·ñÓĞÊı¾İ
+	while(Wire.available())    // åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®
 	{ 
-		SeaLevelData[s]= Wire.read(); // ¶ÁÈ¡Êı¾İ
+		SeaLevelData[s]= Wire.read(); // è¯»å–æ•°æ®
 		s++;
 	}
 	float seaLevel;
@@ -184,17 +184,17 @@ float GPS::SeaLevel(void)
 
 void GPS::UtcDate(byte &UTC_YY, byte &UTC_mm, byte &UTC_DD)
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(11);              // ÇëÇóÖ¸ÁîÂë£¨ÄêÔÂÈÕ£©
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(11);              // è¯·æ±‚æŒ‡ä»¤ç ï¼ˆå¹´æœˆæ—¥ï¼‰
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)3);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)3);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
 	byte UTCdata[3];
 	byte s=0;
-	while(Wire.available())    // ÅĞ¶ÏÊÇ·ñÓĞÊı¾İ
+	while(Wire.available())    // åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®
 	{ 
-		UTCdata[s]= Wire.read(); // ¶ÁÈ¡Êı¾İ
+		UTCdata[s]= Wire.read(); // è¯»å–æ•°æ®
 		s++;
 	}
 	UTC_DD = UTCdata[0];
@@ -205,17 +205,17 @@ void GPS::UtcDate(byte &UTC_YY, byte &UTC_mm, byte &UTC_DD)
 
 float GPS::Course(void)
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(12);              // ÇëÇóÖ¸ÁîÂë(º£Æ½¸ß) µ¥Î»Ã×
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(12);              // è¯·æ±‚æŒ‡ä»¤ç (æµ·å¹³é«˜) å•ä½ç±³
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)4);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)4);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
 	byte CourseData[4];
 	byte s=0;
-	while(Wire.available())    // ÅĞ¶ÏÊÇ·ñÓĞÊı¾İ
+	while(Wire.available())    // åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®
 	{ 
-		CourseData[s]= Wire.read(); // ¶ÁÈ¡Êı¾İ
+		CourseData[s]= Wire.read(); // è¯»å–æ•°æ®
 		s++;
 	}
 	float ourse;
@@ -226,22 +226,29 @@ float GPS::Course(void)
 
 float GPS::Speed(void)
 {
-	Wire.beginTransmission(_addr); //ÏñÖ¸¶¨µØÖ·Éè±¸·¢ËÍÇëÇó
-	Wire.write(13);              // ÇëÇóÖ¸ÁîÂë(ËÙ¶È) µ¥Î» Ç§Ã×Ã¿Ğ¡Ê±
-	Wire.endTransmission();    // Í£Ö¹Ö¸Áî
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(13);              // è¯·æ±‚æŒ‡ä»¤ç (é€Ÿåº¦) å•ä½ åƒç±³æ¯å°æ—¶
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 	
-	/*½ÓÊÕ·µ»ØÊı¾İ*/
-	Wire.requestFrom((int)_addr, (int)4);    // ´ÓÖ¸¶¨µÄµØÖ·¶ÁÈ¡4¸ö×Ö½Ú
+	/*æ¥æ”¶è¿”å›æ•°æ®*/
+	Wire.requestFrom((int)_addr, (int)4);    // ä»æŒ‡å®šçš„åœ°å€è¯»å–4ä¸ªå­—èŠ‚
 	byte SpeedData[4];
 	byte s=0;
-	while(Wire.available())    // ÅĞ¶ÏÊÇ·ñÓĞÊı¾İ
+	while(Wire.available())    // åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®
 	{ 
-		SpeedData[s]= Wire.read(); // ¶ÁÈ¡Êı¾İ
+		SpeedData[s]= Wire.read(); // è¯»å–æ•°æ®
 		s++;
 	}
 	float speed;
 	ByteToFloat(speed,SpeedData);
 	return speed;
+}
+
+void GPS::SetReplace(byte Replace)
+{
+	Wire.beginTransmission(_addr); //åƒæŒ‡å®šåœ°å€è®¾å¤‡å‘é€è¯·æ±‚
+	Wire.write(Replace);              // è¯·æ±‚æŒ‡ä»¤ é…ç½®åˆ·æ–°ç‡
+	Wire.endTransmission();    // åœæ­¢æŒ‡ä»¤
 }
 
 
