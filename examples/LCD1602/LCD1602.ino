@@ -1,4 +1,4 @@
-#include <Wire.h>
+ï»¿#include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <OCROBOT_I2C_GPS.h>                                                                                                                                                                                    
 GPS GPS(4);
@@ -11,11 +11,9 @@ void setup() {
   Wire.begin();
   lcd.init();  
   lcd.backlight();
-
 }
-
 void loop() {
-  /*ÏÔÊ¾Ê±¼ä*/
+  /*æ˜¾ç¤ºæ—¶é—´*/
   GPS.UtcDate(y,m,d);
   GPS.UtcTime(hh,mm,ss,ms);
   lcd.setCursor(0, 0);
@@ -28,7 +26,7 @@ void loop() {
   lcd.print(d);
   lcd.setCursor(0, 1);
   lcd.print("Time:");
-  lcd.print(hh + 8);  //¶«°ËÇø²¹³¥£¬ÏÔÊ¾±±¾©Ê±¼ä
+  lcd.print(hh + 8);  //ä¸œå…«åŒºè¡¥å¿ï¼Œæ˜¾ç¤ºåŒ—äº¬æ—¶é—´
   lcd.print(":");
   lcd.print(mm);
   lcd.print(":");
@@ -37,50 +35,50 @@ void loop() {
   lcd.print(ms);
   delay(delayTime);
   lcd.clear();
-  /*ÏÔÊ¾Î³¶È¾­¶È*/  
+  /*æ˜¾ç¤ºçº¬åº¦ç»åº¦*/  
   lcd.setCursor(0, 0);
-  lcd.print(GPS.LatitudeDirection());  //Î³¶È
+  lcd.print(GPS.LatitudeDirection());  //çº¬åº¦ WGS84åæ ‡ç³»
   lcd.print(":");
   lcd.print(GPS.Latitude(),4);
 
   lcd.setCursor(0, 1);
-  lcd.print(GPS.LongitudeDirection()); //¾­¶È
+  lcd.print(GPS.LongitudeDirection()); //ç»åº¦ WGS84åæ ‡ç³»
   lcd.print(":");
   lcd.print(GPS.Longitude(),4);
   delay(delayTime);
   lcd.clear();
-  /*¶¨Î»×´Ì¬ÓëÓĞĞ§ÎÀĞÇ*/
+  /*å®šä½çŠ¶æ€ä¸æœ‰æ•ˆå«æ˜Ÿ*/
   lcd.setCursor(0, 0);
   lcd.print("Pos:");
-  lcd.print(GPS.Positioning()); //¶¨Î»×´Ì¬ 0:ÎŞ¶¨Î»  1:SPS Ä£Ê½¶¨Î»  2:²î·Ö¡¢SPSÄ£Ê½¶¨Î» 3 :PPS Ä£Ê½¶¨Î»
+  lcd.print(GPS.Positioning()); //å®šä½çŠ¶æ€ 0:æ— å®šä½  1:SPS æ¨¡å¼å®šä½  2:å·®åˆ†ã€SPSæ¨¡å¼å®šä½ 3 :PPS æ¨¡å¼å®šä½
   lcd.setCursor(0, 1);
   lcd.print("Sat:");
-  lcd.print(GPS.Satellite()); //ÓĞĞ§ÎÀĞÇÊıÁ¿
+  lcd.print(GPS.Satellite()); //æœ‰æ•ˆå«æ˜Ÿæ•°é‡
   delay(delayTime);
   lcd.clear();
-  /*Ë®Æ½¶¨Î»¾«¶ÈÓëÍÖÇò¸ß¶È*/
+  /*æ°´å¹³å®šä½ç²¾åº¦ä¸æ¤­çƒé«˜åº¦*/
   lcd.setCursor(0, 0);
   lcd.print("HDOP:");
-  lcd.print(GPS.HDOP()); //Ë®Æ½¾«¶È µ¥Î»Ã×
+  lcd.print(GPS.HDOP()); //æ°´å¹³ç²¾åº¦ å•ä½ç±³
   lcd.setCursor(0, 1);
   lcd.print("MSL:");
-  lcd.print(GPS.MSL()); //ÍÖÇò¸ß£¬µ¥Î»Ã×
+  lcd.print(GPS.MSL()); //æ¤­çƒé«˜ï¼Œå•ä½ç±³
   delay(delayTime);
   lcd.clear();
-  /*º½ÏòÓëËÙ¶È*/
+  /*èˆªå‘ä¸é€Ÿåº¦*/
   lcd.setCursor(0, 0);
   lcd.print("Course:");
-  lcd.print(GPS.Course()); // º½Ïò µ¥Î»¶È
+  lcd.print(GPS.Course()); // èˆªå‘ å•ä½åº¦
   lcd.setCursor(0, 1);
   lcd.print("Speed:");
-  lcd.print(GPS.Speed()); //ËÙ¶È£¬µ¥Î»Ç§Ã×/Ğ¡Ê±
+  lcd.print(GPS.Speed()); //é€Ÿåº¦ï¼Œå•ä½åƒç±³/å°æ—¶
   lcd.print("km/h");
   delay(delayTime);                    
   lcd.clear();
-  /*º£Æ½Ãæ¸ß*/
+  /*æµ·å¹³é¢é«˜*/
   lcd.setCursor(0, 0);
   lcd.print("SeaLevel:");
-  lcd.print(GPS.SeaLevel()); // º£Æ½Ãæ¸ß£¬µ¥Î»Ã×
+  lcd.print(GPS.SeaLevel()); // æµ·å¹³é¢é«˜ï¼Œå•ä½ç±³
   delay(delayTime);
   lcd.clear();
 }
